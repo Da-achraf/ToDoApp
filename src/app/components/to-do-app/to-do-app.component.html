@@ -1,0 +1,128 @@
+<!-- Info pop up -->
+<div
+  [ngStyle]="{ opacity: descriptionVisible ? '.1' : '1' }"
+  [hidden]="!infoVisible"
+  class="info-pop-up"
+>
+  Double click the task row to mark it as completed. Click once to view
+  description.
+  <fa-icon [icon]="faCircleInfo"></fa-icon>
+  <fa-icon (click)="infoVisible = false" [icon]="faCircleXmark"></fa-icon>
+
+  <!-- <span (click)="popUpVisible = false">Hide</span> -->
+</div>
+
+<!-- Task form -->
+<form #myForm="ngForm">
+  <div class="inputs">
+    <input
+      type="text"
+      name="title"
+      [(ngModel)]="title"
+      placeholder="Title"
+      minlength="3"
+      maxlength="40"
+      required
+    />
+    <input type="date" [(ngModel)]="dateValue" name="date" id="date" required />
+    <input type="time" [(ngModel)]="timeValue" name="time" id="time" required />
+  </div>
+  <textarea
+    [(ngModel)]="description"
+    name="description"
+    placeholder="Describe your task..."
+    rows="1"
+  ></textarea>
+  <button
+    [innerHTML]="editMode ? 'Save' : 'Add'"
+    [attr.cursor]="myForm.valid ? 'pointer' : 'not-allowed'"
+    [disabled]="!myForm.valid"
+    [ngStyle]="{
+      opacity: myForm.valid ? '1' : '.6'
+    }"
+    (click)="editMode ? onSave(myForm.value) : onAdd(myForm.value)"
+    type="submit"
+  >
+    Add
+  </button>
+</form>
+
+<!-- Tasks List -->
+<div
+  class="tasks-container"
+  [ngStyle]="{
+    backgroundColor: editMode && id === task.id ? 'var(--secondary-color)' : '',
+    borderBottom: editMode && id === task.id ? 'var(--main-color)' : '',
+    color: editMode && id === task.id ? 'var(--main-color' : '',
+
+  }"
+  *ngFor="let task of tasks"
+>
+  <div
+    class="task-content"
+    [ngStyle]="{
+      textDecoration: task.completed ? 'line-through' : '',
+      opacity: task.completed ? '.8' : '1',
+    }"
+    (dblclick)="onCompleted(task)"
+  >
+    <h4>{{ task.title }}</h4>
+    <p>{{ task.date | date : "dd MMM" }} <span>at</span> {{ task.time }}</p>
+  </div>
+
+  <div *ngIf="descriptionVisible" class="description-pop-up-container">
+    <div class="description-pop-up">
+      <fa-icon
+        (click)="descriptionVisible = false"
+        [icon]="faCircleXmark"
+      ></fa-icon>
+      <fa-icon (click)="onEdit(task)" [icon]="faPenFancy"></fa-icon>
+      <p class="desc-title">{{ descriptionPopUpTitle }}</p>
+      <p>{{ descriptionPopUpContent }}</p>
+    </div>
+  </div>
+
+  <!-- Was here -->
+
+  <div class="icons">
+    <fa-icon
+      *ngIf="editMode && task.id === id"
+      [attr.editMode]="editMode && task.id === id ? 'on' : 'off'"
+      [attr._icon]="'faRotateLeft'"
+      (click)="onRollback()"
+      [icon]="faRotateLeft"
+    ></fa-icon>
+    <fa-icon
+      [hidden]="(editMode && id === task.id) || task.completed"
+      [attr.editMode]="editMode && task.id === id ? 'on' : 'off'"
+      [attr._icon]="'faPenFancy'"
+      (click)="onEdit(task)"
+      [icon]="faPenFancy"
+    ></fa-icon>
+
+    <fa-icon
+      [attr.editMode]="editMode && task.id === id ? 'on' : 'off'"
+      [attr._icon]="'faComment'"
+      (click)="onViewDescription(task)"
+      [icon]="faComment"
+    ></fa-icon>
+    <fa-icon
+      [attr.editMode]="editMode && task.id === id ? 'on' : 'off'"
+      [attr._icon]="'faTrash'"
+      (click)="onDelete(task.id)"
+      [icon]="faTrash"
+    ></fa-icon>
+  </div>
+</div>
+
+<div *ngIf="descriptionVisible" class="description-pop-up-container">
+  <div class="description-pop-up">
+    <fa-icon
+      (click)="descriptionVisible = false"
+      [icon]="faCircleXmark"
+    ></fa-icon>
+    <fa-icon (click)="onEditFromDescriptionBox()" [icon]="faPenFancy"></fa-icon>
+    <p class="desc-title">{{ descriptionPopUpTitle }}</p>
+    <p>{{ descriptionPopUpContent }}</p>
+  </div>
+</div>

@@ -1,0 +1,351 @@
+:host {
+  display: block;
+  max-width: 55%;
+  min-width: 350px;
+  margin-inline: auto;
+  margin-top: 6rem;
+  padding: 2rem 1rem;
+  color: ghostwhite;
+  position: relative;
+}
+
+
+.info-pop-up {
+  width: 20rem;
+  font-size: .9em;
+  margin-inline: auto;
+  margin-bottom: .5rem;
+  padding: .3rem 1rem;
+  text-align: center;
+  color: var(--main-color);
+  background-color: #eee;
+  border-radius: 5px;
+  position: absolute;
+  top: -3.8rem;
+  transform: translateX(-50%);
+  left: 50%;
+}
+
+
+.info-pop-up fa-icon:nth-child(1) {
+  position: absolute;
+  font-size: 1.5em;
+  bottom: 0;
+  left: 3px;
+}
+
+.info-pop-up fa-icon:nth-child(2) {
+  position: absolute;
+  right: 2px;
+  bottom: 0;
+  font-size: 1.5em;
+}
+
+.info-pop-up fa-icon:nth-child(2):hover {
+  cursor: pointer;
+  color: rgba(0,0,0, .8);
+}
+
+form {
+  margin-inline: auto;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: .3rem;
+}
+
+form .inputs {
+  display: flex;
+  gap: .4rem;
+}
+
+form input,
+form textarea {
+  font-size: .9rem;
+  padding: .5rem 0.5rem;
+  border-radius: 4px;
+}
+
+form input:focus,
+form textarea:focus{
+  outline: none;
+}
+
+input[type=text] {
+  flex-basis: 50%;
+}
+
+input[type=date]{
+  flex-basis: 30%;
+}
+
+input[type=time]{
+  flex-basis: 20%;
+}
+
+form textarea {
+  min-height: 3rem;
+  resize: vertical;
+}
+
+button{
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--main-color);
+  margin-top: .5rem;
+  padding: .5rem 3rem;
+  background-color: ghostwhite;
+  border-radius: 4px;
+  border: 1px solid var(--secondary-color);
+}
+
+
+button[cursor='pointer']:hover{
+  cursor: pointer;
+}
+
+button[cursor='not-allowed']:hover{
+  cursor: not-allowed;
+  background-color: ghostwhite;
+  color: var(--main-color);
+}
+
+button:hover {
+  background-color: var(--main-color);
+    color: ghostwhite;
+  }
+
+.tasks-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: .5rem .2rem;
+  border-bottom: 1px solid ghostwhite;
+}
+
+.task-content {
+  flex-basis: 100%;
+  position: relative;
+}
+
+.task-content:hover {
+  cursor: pointer;
+}
+
+.task-content h4::selection,
+.task-content p::selection,
+.task-content p span::selection{
+  background-color: transparent;
+}
+
+.task-content p{
+  font-style: italic;
+  font-size: .9em;
+}
+
+.task-content p span {
+  text-align: center;
+  font-size: .8rem;
+  font-weight: 700;
+}
+
+.icons {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.icons fa-icon {
+  margin-left: .8rem;
+}
+.icons fa-icon[editMode=off] {
+  color: lightgrey;
+}
+
+.icons fa-icon[editMode=on] {
+  color: rgba(0,0,0, .8);
+}
+
+.icons fa-icon:hover {
+  cursor: pointer;
+  color: ghostwhite;
+}
+
+.icons fa-icon[editMode=on]:hover {
+  cursor: pointer;
+  color:black;
+}
+
+.icons fa-icon[_icon=faPenFancy],
+.icons fa-icon[_icon=faTrash],
+.icons fa-icon[_icon=faRotateLeft],
+.icons fa-icon[_icon=faComment]
+{
+  position: relative;
+}
+
+.icons > fa-icon[_icon="faPenFancy"]::before{
+  display: none;
+  position: absolute;
+  content: 'Edit';
+  font-size: .8rem;
+  padding: .2rem .4rem;
+  background-color: var(--main-color);
+  border: .2px solid ghostwhite;
+  border-radius: 3px;
+  color: ghostwhite;
+  opacity: .8;
+  top: -2.1rem;
+  left: -1rem;
+}
+
+.icons > fa-icon[_icon="faTrash"]::before{
+  display: none;
+  position: absolute;
+  content: 'Delete';
+  font-size: .8rem;
+  padding: .2rem .4rem;
+  background-color: var(--main-color);
+  border: .2px solid ghostwhite;
+  border-radius: 3px;
+  color: ghostwhite;
+  opacity: .8;
+  top: -2.1rem;
+  left: -1rem;
+}
+
+.icons > fa-icon[_icon="faRotateLeft"]::before{
+  display: none;
+  position: absolute;
+  content: 'Rollback';
+  font-size: .8rem;
+  padding: .2rem .4rem;
+  background-color: var(--main-color);
+  border: .2px solid ghostwhite;
+  border-radius: 3px;
+  color: ghostwhite;
+  opacity: .8;
+  top: -2.1rem;
+  left: -1rem;
+}
+
+.icons > fa-icon[_icon="faComment"]::before{
+  display: none;
+  position: absolute;
+  content: 'Details';
+  font-size: .8rem;
+  padding: .2rem .4rem;
+  background-color: var(--main-color);
+  border: .2px solid ghostwhite;
+  border-radius: 3px;
+  color: ghostwhite;
+  opacity: .8;
+  top: -2.1rem;
+  left: -1rem;
+}
+
+.icons fa-icon[_icon="faPenFancy"]:hover::before,
+.icons fa-icon[_icon="faTrash"]:hover::before,
+.icons fa-icon[_icon="faComment"]:hover::before,
+.icons fa-icon[_icon="faRotateLeft"]:hover::before{
+  display: block;
+}
+
+.description-pop-up-container {
+  z-index: 1;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(34, 87, 122, .2);
+  color: var(--main-color);
+  transform: translateX(-50%);
+  left: 50%;
+  top: 0;
+}
+
+.description-pop-up {
+  z-index: 1;
+  width: 70%;
+  padding: 2.5rem 2rem 1rem;
+  background-color: ghostwhite;
+  color: var(--main-color);
+  border-radius: 5px;
+  top: 5rem;
+  transform: translateX(-50%);
+  left: 50%;
+  position: absolute;
+}
+
+.description-pop-up .desc-title {
+  position: absolute;
+  top: .2rem;
+  left: .5rem;
+  font-weight: 700;
+
+}
+
+.description-pop-up p {
+  text-align: left
+}
+
+.description-pop-up fa-icon{
+  position: absolute;
+  font-size: 1.2rem;
+}
+
+.description-pop-up fa-icon:nth-child(1){
+  top: 0;
+  right: 2px;
+}
+
+.description-pop-up fa-icon:nth-child(2){
+  top: 0;
+  right: 30px;
+}
+
+.description-pop-up fa-icon:hover{
+  cursor: pointer;
+  color: rgba(0,0,0, .8);
+}
+
+@media screen and (max-width: 650px) {
+  input[type=text]{
+    flex-basis: 100%;
+  }
+  input[type=date]{
+    flex: 2 auto;
+  }
+  input[type=time]{
+    flex: 1 auto;
+  }
+  .inputs {
+    flex-wrap: wrap;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  :host{
+    max-width: 90%;
+  }
+
+  .info-pop-up{
+    max-width: 100%;
+  }
+}
+
+@media only screen and (max-width: 1200px) and (min-width: 900px) {
+  :host{
+    max-width: 70%;
+  }
+  .info-pop-up{
+    max-width: 80%;
+  }
+}
+
+
+.ng-invalid:not(form) {
+  border-left: 6px solid rgb(253, 26, 26);
+}
+
+.ng-valid:not(form) {
+  border-left: 6px solid rgb(28, 183, 51);
+}
